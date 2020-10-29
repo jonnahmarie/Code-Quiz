@@ -1,0 +1,32 @@
+body {
+    font-family: 'Syne Mono', monospace;
+    background-color: #000;
+    color: #00ff00;
+}
+
+#timer {
+    color: red;
+    font-size: 14pt;
+}
+
+#typewriter:after{
+    content: "|";
+    animation: blink 500ms linear infinite alternate;
+    color: white;
+
+}
+
+@-webkit-keyframes blink{
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+
+@-moz-keyframes blink{
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+
+@keyframes blink{
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
