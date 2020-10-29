@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <div class="row w-100">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6 float-left">
-                        <button type="button" id="high-score" class="btn btn-primary">View High Scores</button>
+                        <button type="button" id="high-score" class="btn btn-outline-success">View High Scores? (Y)</button>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-4 text-right">
                         <h5 class="time-remaining">Time Remaining:</h5>
@@ -30,20 +30,22 @@
         </nav>
     </header>
     <main>
-        <div class="container m-3">
+        <div class="container-fluid m-3" id="main-div">
             <div class="row">
                 <div class="col text-center">
                     <h1>Code Quiz</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col text-center">
-                    <p>Description</p>
+                <div class="col-md-2 col-lg-3"></div>
+                <div class="col-md-8 col-lg-6 text-center p-4"  id="typewriter">
+                    <span>Do you know coding basics? Well, let's test your knowledge. You have 1 minute to answer the following questions. Each wrong answer deducts 10 seconds from your total time.</span>
                 </div>
+                <div class="col-md-2 col-lg-3"></div>
             </div>
             <div class="row mt-5">
                 <div class="col text-center">
-                    <button type="button" id="beginQuiz" class="btn btn-secondary">Begin Quiz</button>
+                    <button type="button" id="begin-quiz" class="btn btn-outline-success">Begin Quiz? (Y)</button>
                 </div>
             </div>
         </div>
@@ -51,5 +53,6 @@
 
     <!--Local Javascript Script-->
     <script src="script.js"></script>
+    <script src="typewriter.js"></script>
 </body>
 </html>
