@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quiz</title>
+    <!--External Bootstrap Stylesheet Insert-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--Local Stylesheet Override-->
+    <link rel="stylesheet" href="style.css">
+    <!--Web Font Insert-->
+    <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark p-3">
+            <div class="container-fluid">
+                <div class="row w-100">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 float-left">
+                        <button type="button" id="high-score" class="btn btn-primary">View High Scores</button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-4 text-right">
+                        <h5 class="time-remaining">Time Remaining:</h5>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-2 text-right">
+                        <span id="timer">1:00</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container m-3">
+            <div class="row">
+                <div class="col text-center">
+                    <h1>Code Quiz</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <p>Description</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <button type="button" id="beginQuiz" class="btn btn-secondary">Begin Quiz</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!--Local Javascript Script-->
+    <script src="script.js"></script>
+</body>
+</html>
