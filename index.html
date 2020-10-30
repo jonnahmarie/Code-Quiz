@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Quiz</title>
+    <title>A Basic Code Quiz</title>
     <!--External Bootstrap Stylesheet Insert-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!--Local Stylesheet Override-->
@@ -23,35 +23,72 @@
                         <h5 class="time-remaining">Time Remaining:</h5>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-2 text-right">
-                        <span id="timer">1:00</span>
+                        <span id="timer"></span>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="container-fluid m-3" id="main-div">
-            <div class="row">
-                <div class="col text-center">
-                    <h1>Code Quiz</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-lg-3"></div>
-                <div class="col-md-8 col-lg-6 text-center p-4"  id="typewriter">
-                    <span>Do you know coding basics? Well, let's test your knowledge. You have 1 minute to answer the following questions. Each wrong answer deducts 10 seconds from your total time.</span>
-                </div>
-                <div class="col-md-2 col-lg-3"></div>
-            </div>
-            <div class="row mt-5">
-                <div class="col text-center">
-                    <p>Begin quiz? (Y/N)</p>
-                    <button type="button" id="begin-quiz" class="btn btn-outline-success">Yes</button>
-                    <button type="button" id="no-start" class="btn btn-outline-success">No</button>
-                </div>
+    <div class="container-fluid m-3" id="main-div">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Code Quiz</h1>
             </div>
         </div>
-    </main>
+        <div class="row">
+            <div class="col-md-2 col-lg-3"></div>
+            <div class="col-md-8 col-lg-6 text-center p-4"  id="typewriter">
+                <span>Do you know coding basics? Well, let's test your knowledge. You have 1 minute and 30 seconds to answer the following questions. Each wrong answer deducts 20 seconds from your total time.</span>
+            </div>
+            <div class="col-md-2 col-lg-3"></div>
+        </div>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <p>Begin quiz? (Y/N)</p>
+                <button type="button" id="begin-quiz" class="btn btn-outline-success">Yes</button>
+                <button type="button" id="no-start" class="btn btn-outline-success">No</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid m-3 d-none" id="quiz-div">
+        <div class="row">
+            <div class="col text-center">
+                <h4 id="question-text"></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" id="answer1" class="btn btn-outline-success answers"></button>
+                <button type="button" id="answer2" class="btn btn-outline-success answers"></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" id="answer3" class="btn btn-outline-success answers"></button>
+                <button type="button" id="answer4" class="btn btn-outline-success answers"></button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid m-3 d-none" id="score-div">
+        <div class="row">
+            <div class="col text-center">
+                <h1>High Scores</h1><br>
+                <h4 id="score-text"></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <input type="text" size="40" placeholder="Enter your initials to the scoreboard." name="initials" id="initials">
+                <button type="button" id="submitScoreBtn" class="btn btn-outline-success">Submit</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" id="answer3" class="btn btn-outline-success answers"></button>
+                <button type="button" id="answer4" class="btn btn-outline-success answers"></button>
+            </div>
+        </div>
+    </div>
 
     <!--Local Javascript Script-->
     <script src="script.js"></script>
