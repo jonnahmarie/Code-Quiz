@@ -1,11 +1,14 @@
+//start page global variables
 var highScoreBtn = document.getElementById("high-score");
 var beginQuizBtn = document.getElementById("begin-quiz");
 var noStartBtn = document.getElementById("no-start");
 
+//fun bonus button for start page
 noStartBtn.addEventListener("click", function() {
     alert('$ git commit -m "I guess come back when you are ready?"');
 })
 
+//questions object
 var quizQuestions = [
     {
         question: "Which of the following is not one of the three fundamental programming languages of the modern web?",
@@ -44,6 +47,7 @@ var quizQuestions = [
     }
 ]
 
+//more global variables
 var mainDiv = document.getElementById("main-div");
 var quizDiv = document.getElementById("quiz-div");
 var scoreDiv = document.getElementById("score-div");
@@ -55,27 +59,31 @@ var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var i = 0;
 var setTime = 90;
+var score = 0;
 // var time = 90;
 // var clock;
 
+//begins the quiz on start, hides mainDiv and displays quizDiv
 beginQuizBtn.addEventListener("click", function(event) {
     mainDiv.className = "container-fluid m-3 d-none";
     quizDiv.className = "container-fluid m-3";
 
     startQuiz ();
-})
+});
 
+//fills in the empty elements in the HTML and starts the timer
 function startQuiz () {
-    questionText.textContent = quizQuestions[i].question;
-    answer1.textContent = quizQuestions[i].choices[0];
-    answer2.textContent = quizQuestions[i].choices[1];
-    answer3.textContent = quizQuestions[i].choices[2];
-    answer4.textContent = quizQuestions[i].choices[3];
+    var currentQuestion = quizQuestions[i];
+    questionText.textContent = currentQuestion.question;
+    answer1.textContent = currentQuestion.choices[0];
+    answer2.textContent = currentQuestion.choices[1];
+    answer3.textContent = currentQuestion.choices[2];
+    answer4.textContent = currentQuestion.choices[3];
 
     startTimer(setTime, timer);
     function startTimer(duration, display) {
         var time = duration, minutes, seconds;
-        setInterval(function () {
+        var time2 = setInterval(function () {
             minutes = parseInt(time / 60, 10);
             seconds = parseInt(time % 60, 10);
 
@@ -86,9 +94,29 @@ function startQuiz () {
 
             time--;
 
-            if (time <= 0) {
-                timer.textContent = "00:00";
+            if (time < 0) {
+                clearInterval(time2);
+                time = duration;
             }
-        }, 1000);
+        }, 1000);        
     }
+};
+
+const answerBtns = document.getElementsByClassName("answer-btn");
+for (const button of answerBtns) {
+    button.addEventListener("click", function(answer) {
+        correct = quizQuestions[i].answer;
+
+        if (answer === correct && i !== quizQuestions.length) {
+            score++;
+            i++;
+            startQuiz();
+        } else if (answer !== correct && i !== quizQuestions.length) {
+            i++;
+            setTime = setTime - 20;
+            startQuiz();
+        } else {
+            highScoreFunction();
+        }
+    });
 }
