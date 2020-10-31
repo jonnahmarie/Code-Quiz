@@ -1,8 +1,6 @@
 var highScoreBtn = document.getElementById("high-score");
 var beginQuizBtn = document.getElementById("begin-quiz");
 var noStartBtn = document.getElementById("no-start");
-var timer = document.getElementById("timer");
-var seconds = 60;
 
 noStartBtn.addEventListener("click", function() {
     alert('$ git commit -m "I guess come back when you are ready?"');
@@ -46,3 +44,28 @@ var quizQuestions = [
     }
 ]
 
+var mainDiv = document.getElementById("main-div");
+var quizDiv = document.getElementById("quiz-div");
+var scoreDiv = document.getElementById("score-div");
+var timer = document.getElementById("timer");
+var questionText = document.getElementById("question-text");
+var answer1 = document.getElementById("answer1");
+var answer2 = document.getElementById("answer2");
+var answer3 = document.getElementById("answer3");
+var answer4 = document.getElementById("answer4");
+var i = 0;
+
+beginQuizBtn.addEventListener("click", function(event) {
+    mainDiv.className = "container-fluid m-3 d-none";
+    quizDiv.className = "container-fluid m-3";
+
+    startQuiz ();
+})
+
+function startQuiz () {
+    questionText.textContent = quizQuestions[i].question;
+    answer1.textContent = quizQuestions[i].choices[0];
+    answer2.textContent = quizQuestions[i].choices[1];
+    answer3.textContent = quizQuestions[i].choices[2];
+    answer4.textContent = quizQuestions[i].choices[3];
+}
