@@ -54,6 +54,9 @@ var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var i = 0;
+var setTime = 90;
+// var time = 90;
+// var clock;
 
 beginQuizBtn.addEventListener("click", function(event) {
     mainDiv.className = "container-fluid m-3 d-none";
@@ -68,4 +71,24 @@ function startQuiz () {
     answer2.textContent = quizQuestions[i].choices[1];
     answer3.textContent = quizQuestions[i].choices[2];
     answer4.textContent = quizQuestions[i].choices[3];
+
+    startTimer(setTime, timer);
+    function startTimer(duration, display) {
+        var time = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(time / 60, 10);
+            seconds = parseInt(time % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds: seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            time--;
+
+            if (time <= 0) {
+                timer.textContent = "00:00";
+            }
+        }, 1000);
+    }
 }
