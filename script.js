@@ -68,6 +68,18 @@ beginQuizBtn.addEventListener("click", function(event) {
     mainDiv.className = "container-fluid m-3 d-none";
     quizDiv.className = "container-fluid m-3";
 
+    function timerFunction (time) {
+        var quizTimer = setInterval (function () {
+            setTime--;
+            timer.textContent = setTime;
+            if (setTime === 0) {
+                clearInterval(quizTimer);
+                // endQuiz();
+            }
+        }, 1000);
+    }
+
+    timerFunction();
     startQuiz ();
 });
 
@@ -80,27 +92,27 @@ function startQuiz () {
     answer3.textContent = currentQuestion.choices[2];
     answer4.textContent = currentQuestion.choices[3];
 
-    startTimer(setTime, timer);
-    function startTimer(duration, display) {
-        var time = duration, minutes, seconds;
-        var time2 = setInterval(function () {
-            minutes = parseInt(time / 60, 10);
-            seconds = parseInt(time % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds: seconds;
-
-            display.textContent = minutes + ":" + seconds;
-
-            time--;
-
-            if (time < 0) {
-                clearInterval(time2);
-                time = duration;
-            }
-        }, 1000);        
-    }
+    // startTimer(setTime, timer);
 };
+
+// function startTimer(duration, display) {
+//     var time = duration, minutes, seconds;
+//     var time2 = setInterval(function () {
+//         minutes = parseInt(time / 60, 10);
+//         seconds = parseInt(time % 60, 10);
+
+//         minutes = minutes < 10 ? "0" + minutes : minutes;
+//         seconds = seconds < 10 ? "0" + seconds: seconds;
+
+//         display.textContent = minutes + ":" + seconds;
+
+//         time--;
+
+//         if (time === 0) {
+//             clearInterval(time2);
+//         }
+//     }, 1000);  
+// };
 
 const answerBtns = document.getElementsByClassName("answer-btn");
 for (const button of answerBtns) {
@@ -113,7 +125,7 @@ for (const button of answerBtns) {
             startQuiz();
         } else if (answer !== correct && i !== quizQuestions.length) {
             i++;
-            setTime = setTime - 20;
+            setTime -= 15;
             startQuiz();
         } else {
             highScoreFunction();
