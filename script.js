@@ -37,15 +37,16 @@ var quizQuestions = [
     },
     {
         question: "Syntax in coding is _____.",
-        choices: ['The way you write the code.', 'The coding language.', 'An erro that can appear in your code.', 'Different languages mixed together.'],
+        choices: ['The way you write the code.', 'The coding language.', 'An error that can appear in your code.', 'Different languages mixed together.'],
         answer: "The way you write the code."
     },
     {
-        questions: "How many columns make up Bootstrap's grid system?",
+        question: "How many columns make up Bootstrap's grid system?",
         choices: ['10', '14', '16', '12'],
         answer: "12"
     }
 ]
+
 
 //more global variables
 var mainDiv = document.getElementById("main-div");
@@ -58,77 +59,157 @@ var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 var i = 0;
-var setTime = 90;
+var questionIndex = quizQuestions.length - 1;
+var setTime = 60;
 var score = 0;
-// var time = 90;
-// var clock;
+var scoreText = document.getElementById("score-text");
+
+// console.log(questionIndex);
 
 //begins the quiz on start, hides mainDiv and displays quizDiv
 beginQuizBtn.addEventListener("click", function(event) {
     mainDiv.className = "container-fluid m-3 d-none";
     quizDiv.className = "container-fluid m-3";
 
-    function timerFunction (time) {
-        var quizTimer = setInterval (function () {
-            setTime--;
-            timer.textContent = setTime;
-            if (setTime === 0) {
-                clearInterval(quizTimer);
-                // endQuiz();
-            }
-        }, 1000);
-    }
-
     timerFunction();
     startQuiz ();
 });
 
-//fills in the empty elements in the HTML and starts the timer
-function startQuiz () {
-    var currentQuestion = quizQuestions[i];
-    questionText.textContent = currentQuestion.question;
-    answer1.textContent = currentQuestion.choices[0];
-    answer2.textContent = currentQuestion.choices[1];
-    answer3.textContent = currentQuestion.choices[2];
-    answer4.textContent = currentQuestion.choices[3];
-
-    // startTimer(setTime, timer);
+function timerFunction (duration, display) {
+    var time2 = duration, minutes, seconds
+    var quizTimer = setInterval (function () {
+        setTime--;
+        timer.textContent = setTime;
+        if (setTime === 0) {
+            clearInterval(quizTimer);
+            highScoreFunction();
+        }
+    }, 1000);
+    if (score <= questionIndex) {
+        clearInterval(quizTimer);
+    }
 };
 
-// function startTimer(duration, display) {
-//     var time = duration, minutes, seconds;
-//     var time2 = setInterval(function () {
-//         minutes = parseInt(time / 60, 10);
-//         seconds = parseInt(time % 60, 10);
+//fills in the empty elements in the HTML and starts the timer
+function startQuiz () {
+    var correctAnswer = quizQuestions[i];
+    questionText.textContent = quizQuestions[i].question;
+    answer1.textContent = correctAnswer.choices[0];
+    answer2.textContent = correctAnswer.choices[1];
+    answer3.textContent = correctAnswer.choices[2];
+    answer4.textContent = correctAnswer.choices[3];
+};
 
-//         minutes = minutes < 10 ? "0" + minutes : minutes;
-//         seconds = seconds < 10 ? "0" + seconds: seconds;
-
-//         display.textContent = minutes + ":" + seconds;
-
-//         time--;
-
-//         if (time === 0) {
-//             clearInterval(time2);
-//         }
-//     }, 1000);  
-// };
-
+//event bubbling of buttons with common class names
 const answerBtns = document.getElementsByClassName("answer-btn");
 for (const button of answerBtns) {
-    button.addEventListener("click", function(answer) {
-        correct = quizQuestions[i].answer;
+    button.addEventListener("click", function(event) {
+        var correct = quizQuestions[i].answer;
+        console.log(correct);
 
-        if (answer === correct && i !== quizQuestions.length) {
+        if (i < questionIndex - 1) {
+            i++;
+        }
+        if (event.target.textContent == correct) {
+            i++;
             score++;
-            i++;
-            startQuiz();
-        } else if (answer !== correct && i !== quizQuestions.length) {
-            i++;
-            setTime -= 15;
             startQuiz();
         } else {
+            startQuiz();
+            setTime -= 10;
+        }
+        if (setTime === 0 || i >= questionIndex) {
             highScoreFunction();
         }
     });
+}
+
+//event listeners on all buttons
+
+// answer1.addEventListener("click", function (event) {
+//     event.stopPropagation();
+//     var correct = quizQuestions[i].answer;
+
+//     if (i < questionIndex) {
+//         i++;
+//     }
+//     if (event.target.textContent === correct) {
+//         i ++;
+//         score ++;
+//         startQuiz();
+//     } else {
+//         startQuiz();
+//         setTime -= 10;
+//     }
+//     // if (setTime === 0 || i >= questionIndex) {
+//     //     highScoreFunction();
+//     // }
+// });
+
+// answer2.addEventListener("click", function (event) {
+//     event.stopPropagation();
+//     var correct = quizQuestions[i].answer;
+
+//     if (i < questionIndex) {
+//         i++;
+//     }
+//     if (event.target.textContent === correct) {
+//         i ++;
+//         score ++;
+//         startQuiz();
+//     } else {
+//         startQuiz();
+//         setTime -= 10;
+//     }
+//     // if (setTime === 0 || i >= questionIndex) {
+//     //     highScoreFunction();
+//     // }
+// });
+
+// answer3.addEventListener("click", function (event) {
+//     event.stopPropagation();
+//     var correct = quizQuestions[i].answer;
+
+//     if (i < questionIndex) {
+//         i++;
+//     }
+//     if (event.target.textContent === correct) {
+//         i ++;
+//         score ++;
+//         startQuiz();
+//     } else {
+//         startQuiz();
+//         setTime -= 10;
+//     }
+//     // if (setTime === 0 || i >= questionIndex) {
+//     //     highScoreFunction();
+//     // }
+// });
+
+// answer4.addEventListener("click", function (event) {
+//     event.stopPropagation();
+//     var correct = quizQuestions[i].answer;
+
+//     if (i < questionIndex) {
+//         i++;
+//     }
+//     if (event.target.textContent === correct) {
+//         i ++;
+//         score ++;
+//         startQuiz();
+//     } else {
+//         startQuiz();
+//         setTime -= 10;
+//     }
+//     // if (setTime === 0 || i >= questionIndex) {
+//     //     highScoreFunction();
+//     // }
+// });
+
+function highScoreFunction() {
+    if (setTime === 0 || i >= questionIndex) {
+        quizDiv.className = "container-fluid m-3 d-none";
+        scoreDiv.className = "container-fluid m-3 px-5";
+        scoreText.textContent = "Wow... You managed to successfully answer " + score + " out of " + quizQuestions.length + "... I'm impressed?";
+    }
 }
