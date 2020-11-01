@@ -12,37 +12,37 @@ noStartBtn.addEventListener("click", function() {
 var quizQuestions = [
     {
         question: "Which of the following is not one of the three fundamental programming languages of the modern web?",
-        choices: ['JavaScript', 'C++', 'HTML', 'CSS'],
+        choices: ["JavaScript", "C++", "HTML", "CSS"],
         answer: "C++"
     },
     {
         question: "A function tied to an object is called a ___.",
-        choices: ['String', 'Boolean', 'Web API', 'Method'],
+        choices: ["String", "Boolean", "Web API", "Method"],
         answer: "Method"
     },
     {
         question: "The symbol ___ represents the ___ logical operator.",
-        choices: ['! ; NOT', '&& ; or', '=== ; equal to', '>= ; less than or equal'],
+        choices: ["! ; NOT", "&& ; or", "=== ; equal to", ">= ; less than or equal"],
         answer: "! ; NOT"
     },
     {
         question: "HTML stands for _____.",
-        choices: ['Home Tool Markup Language', 'Hyperlinks and Text Markup Language', 'Hyper Text Markup Language', 'Hacker Table Monitor Logout'],
+        choices: ["Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyper Text Markup Language", "Hacker Table Monitor Logout"],
         answer: "Hyper Text Markup Language"
     },
     {
         question: "What does WWW stand for?",
-        choices: ['Web World Wide', 'World Wide Web', 'Wide Web World', 'Wireless Web Window'],
+        choices: ["Web World Wide", "World Wide Web", "Wide Web World", "Wireless Web Window"],
         answer: "World Wide Web"
     },
     {
         question: "Syntax in coding is _____.",
-        choices: ['The way you write the code.', 'The coding language.', 'An error that can appear in your code.', 'Different languages mixed together.'],
+        choices: ["The way you write the code.", "The coding language.", "An error that can appear in your code.", "Different languages mixed together."],
         answer: "The way you write the code."
     },
     {
         question: "How many columns make up Bootstrap's grid system?",
-        choices: ['10', '14', '16', '12'],
+        choices: ["10", "14", "16", "12"],
         answer: "12"
     }
 ]
@@ -79,7 +79,7 @@ function timerFunction (duration, display) {
     var time2 = duration, minutes, seconds
     var quizTimer = setInterval (function () {
         setTime--;
-        timer.textContent = setTime;
+        timer.innerHTML = setTime;
         if (setTime === 0) {
             clearInterval(quizTimer);
             highScoreFunction();
@@ -94,10 +94,10 @@ function timerFunction (duration, display) {
 function startQuiz () {
     var correctAnswer = quizQuestions[i];
     questionText.textContent = quizQuestions[i].question;
-    answer1.textContent = correctAnswer.choices[0];
-    answer2.textContent = correctAnswer.choices[1];
-    answer3.textContent = correctAnswer.choices[2];
-    answer4.textContent = correctAnswer.choices[3];
+    answer1.innerHTML = correctAnswer.choices[0];
+    answer2.innerHTML = correctAnswer.choices[1];
+    answer3.innerHTML = correctAnswer.choices[2];
+    answer4.innerHTML = correctAnswer.choices[3];
 };
 
 //event bubbling of buttons with common class names
@@ -110,7 +110,7 @@ for (const button of answerBtns) {
         if (i < questionIndex - 1) {
             i++;
         }
-        if (event.target.textContent == correct) {
+        if (event.target.innerHTML == correct) {
             i++;
             score++;
             startQuiz();
@@ -133,7 +133,7 @@ for (const button of answerBtns) {
 //     if (i < questionIndex) {
 //         i++;
 //     }
-//     if (event.target.textContent === correct) {
+//     if (event.target.innerHTML === correct) {
 //         i ++;
 //         score ++;
 //         startQuiz();
@@ -153,7 +153,7 @@ for (const button of answerBtns) {
 //     if (i < questionIndex) {
 //         i++;
 //     }
-//     if (event.target.textContent === correct) {
+//     if (event.target.innerHTML === correct) {
 //         i ++;
 //         score ++;
 //         startQuiz();
@@ -173,7 +173,7 @@ for (const button of answerBtns) {
 //     if (i < questionIndex) {
 //         i++;
 //     }
-//     if (event.target.textContent === correct) {
+//     if (event.target.innerHTML === correct) {
 //         i ++;
 //         score ++;
 //         startQuiz();
@@ -193,7 +193,7 @@ for (const button of answerBtns) {
 //     if (i < questionIndex) {
 //         i++;
 //     }
-//     if (event.target.textContent === correct) {
+//     if (event.target.innerHTML === correct) {
 //         i ++;
 //         score ++;
 //         startQuiz();
@@ -210,6 +210,20 @@ function highScoreFunction() {
     if (setTime === 0 || i >= questionIndex) {
         quizDiv.className = "container-fluid m-3 d-none";
         scoreDiv.className = "container-fluid m-3 px-5";
-        scoreText.textContent = "Wow... You managed to successfully answer " + score + " out of " + quizQuestions.length + "... I'm impressed?";
+        scoreText.innerHTML = "Wow... You managed to successfully answer " + score + " out of " + quizQuestions.length + "... I'm... impressed?";
     }
 }
+
+var submitScoreBtn = document.getElementById("submitScoreBtn");
+var initialEl = document.createElement("div");
+var scoreEl = document.createElement("div");
+var blankEl = document.createElement("div");
+initialEl.setAttribute("class", "col-md-2");
+initialEl.setAttribute("id", "score-table");
+scoreEl.setAttribute("class", "col-md-2");
+scoreEl.setAttribute("id", "score-table");
+blankEl.setAttribute("class", "col-md-4");
+
+submitScoreBtn.addEventListener("click", function addHighScore () {
+
+});
