@@ -52,6 +52,8 @@ var quizQuestions = [
 var mainDiv = document.getElementById("main-div");
 var quizDiv = document.getElementById("quiz-div");
 var scoreDiv = document.getElementById("score-div");
+var scoreList = document.getElementById("score-list-div");
+var scoreboard = document.getElementById("scoreboard");
 var timer = document.getElementById("timer");
 var questionText = document.getElementById("question-text");
 var answer1 = document.getElementById("answer1");
@@ -62,6 +64,7 @@ var i = 0;
 var questionIndex = quizQuestions.length - 1;
 var setTime = 60;
 var score = 0;
+var scoreInputName = document.getElementById("initials");
 var scoreText = document.getElementById("score-text");
 
 // console.log(questionIndex);
@@ -85,9 +88,9 @@ function timerFunction (duration, display) {
             highScoreFunction();
         }
     }, 1000);
-    if (score <= questionIndex) {
-        clearInterval(quizTimer);
-    }
+    // if (score <= questionIndex) {
+    //     clearInterval(quizTimer);
+    // }
 };
 
 //fills in the empty elements in the HTML and starts the timer
@@ -105,18 +108,19 @@ const answerBtns = document.getElementsByClassName("answer-btn");
 for (const button of answerBtns) {
     button.addEventListener("click", function(event) {
         var correct = quizQuestions[i].answer;
-        console.log(correct);
+        // console.log(correct);
 
-        if (i < questionIndex - 1) {
-            i++;
-        }
+        // if (i < questionIndex - 1) {
+        //     i++;
+        // }
         if (event.target.innerHTML == correct) {
             i++;
             score++;
             startQuiz();
         } else {
-            startQuiz();
+            i++;
             setTime -= 10;
+            startQuiz();
         }
         if (setTime === 0 || i >= questionIndex) {
             highScoreFunction();
@@ -210,20 +214,45 @@ function highScoreFunction() {
     if (setTime === 0 || i >= questionIndex) {
         quizDiv.className = "container-fluid m-3 d-none";
         scoreDiv.className = "container-fluid m-3 px-5";
-        scoreText.innerHTML = "Wow... You managed to successfully answer " + score + " out of " + quizQuestions.length + "... I'm... impressed?";
+        scoreList.className = "d-none";
+        scoreText.innerHTML = "Wow... You managed to successfully answer " + score + " questions right... I'm... impressed?";
     }
 }
 
 var submitScoreBtn = document.getElementById("submitScoreBtn");
-var initialEl = document.createElement("div");
-var scoreEl = document.createElement("div");
-var blankEl = document.createElement("div");
-initialEl.setAttribute("class", "col-md-2");
-initialEl.setAttribute("id", "score-table");
-scoreEl.setAttribute("class", "col-md-2");
-scoreEl.setAttribute("id", "score-table");
-blankEl.setAttribute("class", "col-md-4");
+var scoreInputName = document.getElementById("initials");
 
-submitScoreBtn.addEventListener("click", function addHighScore () {
+// submitScoreBtn.addEventListener("click", function (event) {
+//     mainDiv.className = "container-fluid m-3 d-none";
+//     quizDiv.className = "container-fluid m-3 d-none";
+//     // scoreDiv.className = "container-fluid m-3 d-none";
+//     // scoreList.className = "container-fluid m-3";
+    
+//     // if (scoreInputName !== null)  {
+//     //     event.stopPropagation();
+//     //     // console.log("clicked");
 
-});
+//     //     nameDisplay.textContent = "";
+//     //     scoreDisplayName.textContent = "";
+     
+// });
+
+highScoreBtn.addEventListener("click", function() {
+    mainDiv.className = "container-fluid m-3 d-none";
+    quizDiv.className = "container-fluid m-3 d-none";
+    scoreDiv.className = "d-none";
+    scoreList.className = "container-fluid m-3";
+
+    function setScore () {
+        localStorage.setItem("initial", scoreInputName.value);
+        localStorage.setItem("score", score);
+        getScore();
+    }
+})
+
+function getScore() {
+    var scoreContent = localStorage.getItem("initial") + "'s high score is: " +
+        localStorage.getItem("score")
+
+    scoreText.textContent = scoreContent;
+}
