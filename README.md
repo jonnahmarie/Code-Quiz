@@ -29,6 +29,7 @@ I had issues getting the score and initials to populate in the score page, so I 
 This assignment was a challenge and I would definitely like to come back at a later date to conquer it.
 
 Below is a demo gif:
+
 ![Code Quiz Demo Gif](Code-Quiz-Demo.gif)
 
 DISCLAIMER: The beginning start page makes use of a typerwriter effect for the description. I did not create this code from scratch, I found it online from this [website](https://css-tricks.com/snippets/css/typewriter-effect/).
