@@ -16,6 +16,18 @@ body {
 
 }
 
+.bg-dark {
+    background-color: #000 !important;
+}
+
+#score-table {
+    border: 1px solid #00ff00;
+}
+
+h6 {
+    font-weight: bold;
+}
+
 @-webkit-keyframes blink{
 	0%{opacity: 0;}
 	100%{opacity: 1;}
