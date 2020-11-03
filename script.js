@@ -52,9 +52,10 @@ var quizQuestions = [
 var mainDiv = document.getElementById("main-div");
 var quizDiv = document.getElementById("quiz-div");
 var scoreDiv = document.getElementById("score-div");
+var scoreText = document.getElementById("score-text");
 var scoreList = document.getElementById("score-list-div");
-var scoreboard = document.getElementById("scoreboard");
 var timer = document.getElementById("timer");
+var timerEnd = document.getElementById("timer-end"); //false end of timer
 var questionText = document.getElementById("question-text");
 var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
@@ -65,7 +66,6 @@ var questionIndex = quizQuestions.length - 1;
 var setTime = 60;
 var score = 0;
 var scoreInputName = document.getElementById("initials");
-var scoreText = document.getElementById("score-text");
 
 // console.log(questionIndex);
 
@@ -83,14 +83,14 @@ function timerFunction (duration, display) {
     var quizTimer = setInterval (function () {
         setTime--;
         timer.innerHTML = setTime;
-        if (setTime === 0) {
+        if (setTime === 0 ) {
             clearInterval(quizTimer);
             highScoreFunction();
         }
     }, 1000);
-    // if (score <= questionIndex) {
-    //     clearInterval(quizTimer);
-    // }
+    if (setTime === 0 || i === questionIndex) {
+        clearInterval(quizTimer);
+    }
 };
 
 //fills in the empty elements in the HTML and starts the timer
@@ -212,6 +212,8 @@ for (const button of answerBtns) {
 
 function highScoreFunction() {
     if (setTime === 0 || i >= questionIndex) {
+        timerEnd.className = "";
+        timer.className = "d-none";
         quizDiv.className = "container-fluid m-3 d-none";
         scoreDiv.className = "container-fluid m-3 px-5";
         scoreList.className = "d-none";
@@ -221,21 +223,51 @@ function highScoreFunction() {
 
 var submitScoreBtn = document.getElementById("submitScoreBtn");
 var scoreInputName = document.getElementById("initials");
+var highScoreName = document.getElementById("user-initials");
+var highScoreNum = document.getElementById("user-score");
 
-// submitScoreBtn.addEventListener("click", function (event) {
-//     mainDiv.className = "container-fluid m-3 d-none";
-//     quizDiv.className = "container-fluid m-3 d-none";
-//     // scoreDiv.className = "container-fluid m-3 d-none";
-//     // scoreList.className = "container-fluid m-3";
+submitScoreBtn.addEventListener("click", function (event) {
+    mainDiv.className = "container-fluid m-3 d-none";
+    quizDiv.className = "container-fluid m-3 d-none";
+    scoreDiv.className = "container-fluid m-3";
+    scoreList.className = "container-fluid m-3 d-none";
     
-//     // if (scoreInputName !== null)  {
-//     //     event.stopPropagation();
-//     //     // console.log("clicked");
+    if (scoreInputName.value === "") {
+        alert("Don't be afraid to attach your name to this score...");
+        return false;
+    } else {
+        var savedScore = JSON.parse(localStorage.getItem("savedScore")) || [];
+        var currentInitials = scoreInputName.value.trim();
+        var currentScore = {
+            name: currentInitials,
+            score: score
+        };
 
-//     //     nameDisplay.textContent = "";
-//     //     scoreDisplayName.textContent = "";
+        savedScore.push(currentScore);
+        localStorage.setItem("savedScore", JSON.stringify(savedScore));
+        generateHighScores();
+    }
      
-// });
+});
+
+function generateHighScores() {
+    mainDiv.className = "container-fluid m-3 d-none";
+    quizDiv.className = "container-fluid m-3 d-none";
+    scoreDiv.className = "container-fluid m-3 d-none";
+    scoreList.className = "container-fluid m-3";
+    highScoreName.innerHTML = "";
+    highScoreNum.innerHTML = "";
+
+    var highscores = JSON.parse(localStorage.getItem("savedScore")) || [];
+    for (i = 0; i < highscores.length; i++) {
+        var newInitialLi = document.createElement("li");
+        var newScoreLi = document.createElement("li");
+        newInitialLi.textContent = highscores[i].name;
+        newScoreLi.textContent = highscores[i].score;
+        highScoreName.appendChild(newInitialLi);
+        highScoreNum.appendChild(newScoreLi);
+    }
+};
 
 highScoreBtn.addEventListener("click", function() {
     mainDiv.className = "container-fluid m-3 d-none";
@@ -243,16 +275,5 @@ highScoreBtn.addEventListener("click", function() {
     scoreDiv.className = "d-none";
     scoreList.className = "container-fluid m-3";
 
-    function setScore () {
-        localStorage.setItem("initial", scoreInputName.value);
-        localStorage.setItem("score", score);
-        getScore();
-    }
+    generateHighScores();
 })
-
-function getScore() {
-    var scoreContent = localStorage.getItem("initial") + "'s high score is: " +
-        localStorage.getItem("score")
-
-    scoreText.textContent = scoreContent;
-}

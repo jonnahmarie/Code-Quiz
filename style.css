@@ -24,6 +24,25 @@ h6 {
     font-weight: bold;
 }
 
+#score-table-head {
+    border: 1px solid #000;
+    background-color: #00ff00;
+    color: #000;
+    display: inline;
+}
+
+/* .score-table-style {
+    display: inline-block;
+} */
+
+li {
+    /* border-left: 1px solid #00ff00;
+    border-right: 1px solid #00ff00;
+    border-bottom: 1px solid #00ff00; */
+    list-style-type: none;
+    padding: 5px;
+}
+
 @-webkit-keyframes blink{
 	0%{opacity: 0;}
 	100%{opacity: 1;}
