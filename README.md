@@ -33,6 +33,3 @@ Below is a demo gif:
 ![Code Quiz Demo Gif](Code-Quiz-Demo.gif)
 
 DISCLAIMER: The beginning start page makes use of a typerwriter effect for the description. I did not create this code from scratch, I found it online from this [website](https://css-tricks.com/snippets/css/typewriter-effect/).
-
-
-
