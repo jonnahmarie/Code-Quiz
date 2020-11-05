@@ -33,3 +33,7 @@ Below is a demo gif:
 ![Code Quiz Demo Gif](Code-Quiz-Demo.gif)
 
 DISCLAIMER: The beginning start page makes use of a typerwriter effect for the description. I did not create this code from scratch, I found it online from this [website](https://css-tricks.com/snippets/css/typewriter-effect/).
+
+##Edit as of 11/4/20
+
+Realized I didn't add an updated README file for changes I made after submission. I played around with local storage coding after viewing similar quizzes on github. I do not expect this section of coding to be included in my final grade.
